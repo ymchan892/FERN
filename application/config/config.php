@@ -525,7 +525,7 @@ $config['proxy_ips'] = '';
 // 玉山銀行預設匯率
 $config['esun_rate_page'] = 'https://www.esunbank.com.tw/bank/Layouts/esunbank/Accessibility/rate_exchange.aspx';
 $config['esun_rate'] = array(
-  'USD' => '30.3',
-  'JPY' => '0.2665'
+  'USD' => '30.15',
+  'JPY' => '0.2660'
 );
-$config['esun_rate_email'] = 'shengeih@gmail.com';
+// $config['esun_rate_email'] = 'shengeih@gmail.com';
