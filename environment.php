@@ -9,12 +9,9 @@ date_default_timezone_set("Asia/Taipei");
 // 加密使用
 define('ENCRYPT_IV', null);
 // webhooks for salck
-define('WEBHOOK_FOR_SLACK', 'https://hooks.slack.com/services/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');
+define('WEBHOOK_FOR_SLACK', 'https://hooks.slack.com/services/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');
 // 判斷抓取 HTTP_HOST 前六碼 by Shengeih Wang @2017/01/09
 define('HTTP_HOST', substr($_SERVER['HTTP_HOST'], 0, 7));
-// SMTP 帳號密碼 by Shengeih Wang @ 2017/06/28
-define('SMTP_USER', 'postmaster@sandbox20ac87bc418a4221a44ca56c56d2829b.mailgun.org');
-define('SMTP_PASS', '031cb9eedddd40f591c6204e3abb0bad');
 
 // if ($_SERVER['HTTP_HOST'] == '192.168.99.100:81') { // development
 //     include('environment-development.php');

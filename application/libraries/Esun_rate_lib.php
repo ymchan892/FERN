@@ -60,19 +60,12 @@ class Esun_rate_lib
                         // 進行通知
                         echo 'YES - '.$rate['currency'];
                         echo '<br>';
-                        $content .= $rate['currency'].' - 賣出即期匯率 : '.$rate['sell'].' 請進行購買<Br>';
+                        $message = $rate['currency'].' - 賣出即期匯率 : '.$rate['sell'].' 請進行購買 ';
+                        $message .= '('.$this->CI->config->item('esun_rate_page').')';
+                        $this->CI->common_lib->send_to_slack('#fren', $message);
                     }
                 }
             }
-        }
-
-        if (!empty($content)) {
-            $to = $this->CI->config->item('esun_rate_email');
-            $subject = '玉山銀行 - 抓取即期匯率通知';
-            $message = date('Y-m-d H:i:s').'<br><br>';
-            $message .=$content.'<br><br>';
-            $message .= '<a href="'.$this->CI->config->item('esun_rate_page').'">'.$this->CI->config->item('esun_rate_page').'</a>';
-            $this->CI->common_lib->send_email($to, $subject, $message);
         }
     }
 }

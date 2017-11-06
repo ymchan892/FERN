@@ -10,7 +10,6 @@ class Common_lib
     public function __construct()
     {
         $this->CI = & get_instance();
-        $this->CI->load->library('email');
     }
 
     /**
@@ -198,12 +197,12 @@ class Common_lib
     /**
      * 傳送訊息到 Slack
      */
-    public function send_to_slack($text)
+    public function send_to_slack($channel, $text)
     {
         $payload = array(
-            'channel' => '#notification',
+            'channel' => $channel,
             'username' => 'webhookbot',
-            'text' => WEBSITE_NAME . ' - ' . $text,
+            'text' => $text,
             'icon_emoji' => ':ghost:'
         );
 
