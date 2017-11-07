@@ -201,7 +201,7 @@ class Common_lib
     {
         $payload = array(
             'channel' => $channel,
-            'username' => 'webhookbot',
+            'username' => 'Rate',
             'text' => $text,
             'icon_emoji' => ':ghost:'
         );
