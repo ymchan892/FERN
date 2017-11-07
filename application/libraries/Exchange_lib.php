@@ -69,12 +69,12 @@ class Exchange_lib
                     if ($type == 'Cash') {
                         // 判斷商業邏輯 , 是否賣出現金匯率低於某個值
                         if ($rate['Cash_Sell'] <= $value) {
-                            $message = $bank.'('.$rate['Currency'].') 現金賣出匯率 : '.$rate['Cash_Sell'].' <= 設定匯率 : '.$value.' 可購買';
+                            $message = $bank.'('.$rate['Currency'].') 現金賣出匯率('.$rate['Cash_Sell'].')低於您所指定的匯率('.$value.')';
                         }
                     } else {
                         // 判斷商業邏輯 , 是否賣出即期匯率低於某個值
                         if ($rate['Spot_Sell'] <= $value) {
-                            $message = $bank.'('.$rate['Currency'].') 即期賣出匯率 : '.$rate['Spot_Sell'].' <= 設定匯率 : '.$value.' 可購買';
+                            $message = $bank.'('.$rate['Currency'].') 即期賣出匯率('.$rate['Spot_Sell'].')低於您所指定的匯率('.$value.')';
                         }
                     }
 
