@@ -15,7 +15,10 @@ class Exchange_lib
 
     public function get_rate()
     {
-        $html = file_get_html($this->CI->config->item('rate_page'));
+        // 指定讀取的銀行頁面
+        $bank = $this->CI->config->item('bank');
+        $page = $this->set_bank($bank);
+        $html = file_get_html($page);
         $table = $html->find('table', 0);
         // 判斷如果是空白則進行通知
         if (empty($table)) {
@@ -46,6 +49,15 @@ class Exchange_lib
                         );
             }
         }
+        // 判斷如果有 ?type=json 則直接呈現 json 資料
+        if ($this->CI->input->get('type') == 'json') {
+            $array = array(
+              'bank' => $bank,
+              'data' => $rate_ary
+            );
+            echo json_encode($array);
+            exit;
+        }
 
         // 判斷 指定的抓取幣別及匯率
         $find_ary = $this->CI->config->item('rate');
@@ -68,7 +80,20 @@ class Exchange_lib
 
     private function slack($message)
     {
-        // $message .= '('.$this->CI->config->item('rate_page').')';
         $this->CI->common_lib->send_to_slack('#fren', $message);
+    }
+
+
+    private function set_bank($bank)
+    {
+        if ($bank == '' || $bank == null) {
+            exit;
+        }
+
+        foreach ($this->CI->config->item('banks') as $key => $value) {
+            if ($value['bank'] == $bank) {
+                return $value['url'];
+            }
+        }
     }
 }
