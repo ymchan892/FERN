@@ -526,8 +526,8 @@ $config['proxy_ips'] = '';
 $config['bank'] = '玉山銀行';
 // 各幣別低於此匯率即通知
 $config['rate'] = array(
-  'USD' => '30.15',
-  'JPY' => '0.2650'
+  'USD' => '30.20',
+  'JPY' => '0.2660'
 );
 
 $config['banks'] = array(
