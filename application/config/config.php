@@ -527,7 +527,7 @@ $config['proxy_ips'] = '';
 $config['rate_page'] = 'http://www.findrate.tw/bank/25/#.WgFdRBOCzOQ';
 // 各幣別低於此匯率即通知
 $config['rate'] = array(
-  'USD' => '30.15',
-  'JPY' => '0.2650'
+  'USD' => '30.30',
+  'JPY' => '0.2666'
 );
 // $config['esun_rate_email'] = 'shengeih@gmail.com';
