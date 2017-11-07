@@ -17,8 +17,10 @@ class Exchange_lib
     {
         // 指定讀取的銀行頁面
         $bank = $this->CI->config->item('bank');
-        $page = $this->set_bank($bank);
-        $html = file_get_html($page);
+        $type = $this->CI->config->item('type');
+        $find_ary = $this->CI->config->item('rate');
+
+        $html = file_get_html($this->set_bank($bank));
         $table = $html->find('table', 0);
         // 判斷如果是空白則進行通知
         if (empty($table)) {
@@ -59,30 +61,33 @@ class Exchange_lib
             exit;
         }
 
-        // 判斷 指定的抓取幣別及匯率
-        $find_ary = $this->CI->config->item('rate');
-        $content = '';
+        $message = '';
         foreach ($rate_ary as $rate) {
             foreach ($find_ary as $key => $value) {
                 // echo $find[0].' - '.$find[1].'<br>';
                 if (strpos($rate['Currency'], $key) !== false) {
-                    // 判斷商業邏輯 , 是否賣出匯率低於某個值
-                    if ($rate['Spot_Sell'] <= $value) {
-                        // 進行通知
-                        echo 'YES - '.$rate['Currency'];
-                        echo '<br>';
-                        $this->slack($message = '玉山('.$rate['Currency'].') Spot_Sell:'.$rate['Spot_Sell']);
+                    if ($type == 'Cash') {
+                        // 判斷商業邏輯 , 是否賣出現金匯率低於某個值
+                        if ($rate['Cash_Sell'] <= $value) {
+                            $message = $bank.'('.$rate['Currency'].') 現金賣出匯率 : '.$rate['Cash_Sell'].' <= 設定匯率 : '.$value.' 可購買';
+                        }
+                    } else {
+                        // 判斷商業邏輯 , 是否賣出即期匯率低於某個值
+                        if ($rate['Spot_Sell'] <= $value) {
+                            $message = $bank.'('.$rate['Currency'].') 即期賣出匯率 : '.$rate['Spot_Sell'].' <= 設定匯率 : '.$value.' 可購買';
+                        }
+                    }
+
+                    // 如果 url 沒有 slack=1 , 則進行實際發送 , 測試用
+                    if (empty($this->CI->input->get('slack'))) {
+                        $this->CI->common_lib->send_to_slack('#fren', $message);
+                    } else {
+                        echo $message;
                     }
                 }
             }
         }
     }
-
-    private function slack($message)
-    {
-        $this->CI->common_lib->send_to_slack('#fren', $message);
-    }
-
 
     private function set_bank($bank)
     {
