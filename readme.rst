@@ -1,9 +1,9 @@
 ###################
-玉山銀行即期匯率通知
+銀行匯率通知
 ###################
 
-外匯匯率通知(Foreign Exchange Rate Notification)
-抓取玉山銀行即期匯率 , 並且低於某個匯率時進行通知
+匯率(Foreign Exchange Rate Notification)
+抓取銀行即期匯率 , 並且低於某個匯率時進行通知
 
 *******************
 Release Information
