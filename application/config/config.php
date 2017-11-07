@@ -527,7 +527,7 @@ $config['bank'] = '玉山銀行';
 $config['type'] = 'Spot'; // Cash(現金) or Spot(即期)
 // 各幣別低於此匯率即通知
 $config['rate'] = array(
-  'USD' => '30.20',
+  'USD' => '30.25',
   'JPY' => '0.2661'
 );
 
