@@ -5,6 +5,8 @@
 匯率(Foreign Exchange Rate Notification)
 抓取銀行即期匯率 , 並且低於某個匯率時進行通知
 
+(匯率來源各銀行公告，資訊僅供參考，實際匯率以交易當時匯率為主)
+
 *******************
 Release Information
 *******************
