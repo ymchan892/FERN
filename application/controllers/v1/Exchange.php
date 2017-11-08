@@ -71,6 +71,8 @@ class Exchange extends REST_Controller
             $this->response($return, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
 
-        $this->exchange_lib->get_rate($code, $type, $currency, $exchange);
+        $data = $this->exchange_lib->get_rate($code, $type, $currency, $exchange);
+        $return = $this->common_lib->output_for_json(__METHOD__, 'Success', '', $data);
+        $this->set_response($return, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
     }
 }

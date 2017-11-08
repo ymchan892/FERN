@@ -81,11 +81,12 @@ class Exchange_lib
                 }
 
                 // 如果 url 沒有 slack=1 , 則進行實際發送 , 測試用
-                if (empty($this->CI->input->get('slack')) && $_SERVER['HTTP_HOST'] != '192.168.99.100') {
-                    $this->CI->common_lib->send_to_slack('#fren', $message);
-                } else {
-                    echo $message.'<br>';
-                }
+                // if (empty($this->CI->input->get('slack')) && $_SERVER['HTTP_HOST'] != '192.168.99.100') {
+                //     $this->CI->common_lib->send_to_slack('#fren', $message);
+                // } else {
+                //     echo $message.'<br>';
+                // }
+                return $message;
             }
             // }
         }
