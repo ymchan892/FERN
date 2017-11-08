@@ -241,7 +241,7 @@ class Common_lib
     /**
      * API 回傳的 JSON 格式
      */
-    public function output_for_json($method, $status, $error = null, $data = null, $info = null)
+    public function output_for_json($method, $status, $message = null, $data = null, $info = null)
     {
         $return = array(
             // 增加 method 回傳值 by Ivan Wang @ 2017/01/26
@@ -250,8 +250,8 @@ class Common_lib
         );
 
         // 判斷 error 如果不是空字串就輸出 by Ivan Wang @ 2017/01/26
-        if ($error != '') {
-            $return['error'] = $error;
+        if ($message != '') {
+            $return['message'] = $message;
         }
 
         // 判斷 data 如果不是空字串就輸出 by Ivan Wang @ 2017/01/26

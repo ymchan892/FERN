@@ -523,173 +523,217 @@ $config['rewrite_short_tags'] = false;
 $config['proxy_ips'] = '';
 
 // 匯率資料
-$config['bank'] = '玉山銀行';
+$config['code'] = '808'; // 預設的銀行
 $config['type'] = 'Spot'; // Cash(現金) or Spot(即期)
 // 各幣別低於此匯率即通知
 $config['rate'] = array(
-  'USD' => '30.25',
-  'JPY' => '0.2661'
+  'USD' => '30.50',
+  'JPY' => '0.27'
+);
+// 可接受查詢的幣別
+$config['currency'] = array(
+  'USD','HKD','GBP','AUD','CAD','SGD','CHF','JPY','ZAR','SEK','NZD','THB','PHP','IDR','EUR','KRW','VND','MYR','CNY'
 );
 
 $config['banks'] = array(
   array(
-    'bank' => '台灣銀行',
+    'code' => '004',
+    'name' => '台灣銀行',
     'url' => 'http://www.findrate.tw/bank/29/#.WgFwzBOCzOQ'
   ),
   array(
-    'bank' => '兆豐銀行',
+    'code' => '017',
+    'name' => '兆豐銀行',
     'url' => 'http://www.findrate.tw/bank/5/#.WgFxDhOCzOQ'
   ),
   array(
-    'bank' => '合作金庫',
+    'code' => '006',
+    'name' => '合作金庫',
     'url' => 'http://www.findrate.tw/bank/10/#.WgFyGxOCzOQ'
   ),
   array(
-    'bank' => '彰化銀行',
+    'code' => '009',
+    'name' => '彰化銀行',
     'url' => 'http://www.findrate.tw/bank/16/#.WgFyUxOCzOQ'
   ),
   array(
-    'bank' => '永豐銀行',
+    'code' => '807',
+    'name' => '永豐銀行',
     'url' => 'http://www.findrate.tw/bank/21/#.WgFyaROCzOQ'
   ),
   array(
-    'bank' => '第一銀行',
+    'code' => '007',
+    'name' => '第一銀行',
     'url' => 'http://www.findrate.tw/bank/26/#.WgFyoxOCzOQ'
   ),
   array(
-    'bank' => '凱基銀行',
+    'code' => '809',
+    'name' => '凱基銀行',
     'url' => 'http://www.findrate.tw/bank/33/#.WgFyuROCzOQ'
   ),
   array(
-    'bank' => '王道銀行',
+    'code' => '048',
+    'name' => '王道銀行',
     'url' => 'http://www.findrate.tw/bank/39/#.WgFyyROCzOQ'
   ),
   array(
-    'bank' => '三信商銀',
+    'code' => '147',
+    'name' => '三信商銀',
     'url' => 'http://www.findrate.tw/bank/0/#.WgFy1ROCzOQ'
   ),
   array(
-    'bank' => '匯豐銀行',
+    'code' => '081',
+    'name' => '匯豐銀行',
     'url' => 'http://www.findrate.tw/bank/6/#.WgFy5BOCzOQ'
   ),
   array(
-    'bank' => '國泰世華',
+    'code' => '013',
+    'name' => '國泰世華',
     'url' => 'http://www.findrate.tw/bank/11/#.WgFy-ROCzOQ'
   ),
   array(
-    'bank' => '新光銀行',
+    'code' => '103',
+    'name' => '新光銀行',
     'url' => 'http://www.findrate.tw/bank/17/#.WgFzBhOCzOQ'
   ),
   array(
-    'bank' => '泰國盤谷銀行',
+    'code' => '023',
+    'name' => '泰國盤谷銀行',
     'url' => 'http://www.findrate.tw/bank/22/#.WgFzGROCzOQ'
   ),
   array(
-    'bank' => '台灣企銀',
+    'code' => '050',
+    'name' => '台灣企銀',
     'url' => 'http://www.findrate.tw/bank/28/#.WgFzJBOCzOQ'
   ),
   array(
-    'bank' => '遠東商銀',
+    'code' => '805',
+    'name' => '遠東商銀',
     'url' => 'http://www.findrate.tw/bank/34/#.WgFzLhOCzOQ'
   ),
   array(
-    'bank' => '瑞興銀行',
+    'code' => '101',
+    'name' => '瑞興銀行',
     'url' => 'http://www.findrate.tw/bank/38/#.WgFzPhOCzOQ'
   ),
   array(
-    'bank' => '中國信託',
+    'code' => '822',
+    'name' => '中國信託',
     'url' => 'http://www.findrate.tw/bank/2/#.WgFzVROCzOQ'
   ),
   array(
-    'bank' => '台中銀行',
+    'code' => '053',
+    'name' => '台中銀行',
     'url' => 'http://www.findrate.tw/bank/7/#.WgFzYROCzOQ'
   ),
   array(
-    'bank' => '土地銀行',
+    'code' => '005',
+    'name' => '土地銀行',
     'url' => 'http://www.findrate.tw/bank/12/#.WgFzaxOCzOQ'
   ),
   array(
-    'bank' => '日盛銀行',
+    'code' => '815',
+    'name' => '日盛銀行',
     'url' => 'http://www.findrate.tw/bank/18/#.WgFzdROCzOQ'
   ),
   array(
-    'bank' => '渣打銀行',
+    'code' => '052',
+    'name' => '渣打銀行',
     'url' => 'http://www.findrate.tw/bank/23/#.WgFzgROCzOQ'
   ),
   array(
-    'bank' => '花旗銀行',
+    'code' => '021',
+    'name' => '花旗銀行',
     'url' => 'http://www.findrate.tw/bank/30/#.WgFzjhOCzOQ'
   ),
   array(
-    'bank' => '郵局',
+    'code' => '700',
+    'name' => '郵局',
     'url' => 'http://www.findrate.tw/bank/35/#.WgFzpROCzOQ'
   ),
   array(
-    'bank' => '上海銀行',
+    'code' => '011',
+    'name' => '上海銀行',
     'url' => 'http://www.findrate.tw/bank/1/#.WgFzrxOCzOQ'
   ),
   array(
-    'bank' => '京城銀行',
+    'code' => '054',
+    'name' => '京城銀行',
     'url' => 'http://www.findrate.tw/bank/3/#.WgFzuBOCzOQ'
   ),
   array(
-    'bank' => '台北富邦',
+    'code' => '012',
+    'name' => '台北富邦',
     'url' => 'http://www.findrate.tw/bank/8/#.WgFzzBOCzOQ'
   ),
   array(
-    'bank' => '大眾銀行',
+    'code' => '814',
+    'name' => '大眾銀行',
     'url' => 'http://www.findrate.tw/bank/14/#.WgFz1ROCzOQ'
   ),
   array(
-    'bank' => '星展銀行',
+    'code' => '810',
+    'name' => '星展銀行',
     'url' => 'http://www.findrate.tw/bank/19/#.WgFz4ROCzOQ'
   ),
   array(
-    'bank' => '澳盛銀行',
+    'code' => '039',
+    'name' => '澳盛銀行',
     'url' => 'http://www.findrate.tw/bank/24/#.WgFz6ROCzOQ'
   ),
   array(
-    'bank' => '華南銀行',
+    'code' => '008',
+    'name' => '華南銀行',
     'url' => 'http://www.findrate.tw/bank/31/#.WgFz9hOCzOQ'
   ),
   array(
-    'bank' => '澳盛銀行',
+    'code' => '039',
+    'name' => '澳盛銀行',
     'url' => 'http://www.findrate.tw/bank/36/#.WgF0ChOCzOQ'
   ),
   array(
-    'bank' => '陽信銀行',
+    'code' => '108',
+    'name' => '陽信銀行',
     'url' => 'http://www.findrate.tw/bank/24/#.WgFz6ROCzOQ'
   ),
   array(
-    'bank' => '聯邦銀行',
+    'code' => '803',
+    'name' => '聯邦銀行',
     'url' => 'http://www.findrate.tw/bank/27/#.WgF0FxOCzOQ'
   ),
   array(
-    'bank' => '元大銀行',
+    'code' => '806',
+    'name' => '元大銀行',
     'url' => 'http://www.findrate.tw/bank/4/#.WgF0IhOCzOQ'
   ),
   array(
-    'bank' => '台新銀行',
+    'code' => '812',
+    'name' => '台新銀行',
     'url' => 'http://www.findrate.tw/bank/9/#.WgF0KxOCzOQ'
   ),
   array(
-    'bank' => '安泰銀行',
+    'code' => '816',
+    'name' => '安泰銀行',
     'url' => 'http://www.findrate.tw/bank/15/#.WgF0NBOCzOQ'
   ),
   array(
-    'bank' => '板信銀行',
+    'code' => '118',
+    'name' => '板信銀行',
     'url' => 'http://www.findrate.tw/bank/20/#.WgF0QxOCzOQ'
   ),
   array(
-    'bank' => '玉山銀行',
+    'code' => '808',
+    'name' => '玉山銀行',
     'url' => 'http://www.findrate.tw/bank/25/#.WgF0WBOCzOQ'
   ),
   array(
-    'bank' => '華泰銀行',
+    'code' => '102',
+    'name' => '華泰銀行',
     'url' => 'http://www.findrate.tw/bank/32/#.WgF0YxOCzOQ'
   ),
   array(
-    'bank' => '高雄銀行',
+    'code' => '106',
+    'name' => '高雄銀行',
     'url' => 'http://www.findrate.tw/bank/37/#.WgF0cROCzOQ'
   )
 );
