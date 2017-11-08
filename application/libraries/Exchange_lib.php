@@ -71,21 +71,26 @@ class Exchange_lib
                 if ($type == 'Cash') {
                     // 判斷商業邏輯 , 是否賣出現金匯率低於某個值
                     if ($rate['Cash_Sell'] <= $exchange) {
-                        $message = $bank['name'].'('.$rate['Currency'].') 現金賣出匯率('.$rate['Cash_Sell'].')低於您所指定的匯率('.$exchange.')';
+                        $message = $bank['name'].'('.$rate['Currency'].') 現金賣出匯率('.$rate['Cash_Sell'].') 低於 您所指定的匯率('.$exchange.')';
+                    } else {
+                        $message = $bank['name'].'('.$rate['Currency'].') 現金賣出匯率('.$rate['Cash_Sell'].') 高於 您所指定的匯率('.$exchange.')';
                     }
                 } else {
                     // 判斷商業邏輯 , 是否賣出即期匯率低於某個值
                     if ($rate['Spot_Sell'] <= $exchange) {
-                        $message = $bank['name'].'('.$rate['Currency'].') 即期賣出匯率('.$rate['Spot_Sell'].')低於您所指定的匯率('.$exchange.')';
+                        $message = $bank['name'].'('.$rate['Currency'].') 即期賣出匯率('.$rate['Spot_Sell'].') 低於 您所指定的匯率('.$exchange.')';
+                    } else {
+                        $message = $bank['name'].'('.$rate['Currency'].') 即期賣出匯率('.$rate['Spot_Sell'].') 高於 您所指定的匯率('.$exchange.')';
                     }
                 }
 
                 // 如果 url 沒有 slack=1 , 則進行實際發送 , 測試用
-                if (empty($this->CI->input->get('slack')) && $_SERVER['HTTP_HOST'] != '192.168.99.100') {
-                    $this->CI->common_lib->send_to_slack('#fren', $message);
-                } else {
-                    echo $message.'<br>';
-                }
+                // if (empty($this->CI->input->get('slack')) && $_SERVER['HTTP_HOST'] != '192.168.99.100') {
+                //     $this->CI->common_lib->send_to_slack('#fren', $message);
+                // } else {
+                //     echo $message.'<br>';
+                // }
+                return $message;
             }
             // }
         }
