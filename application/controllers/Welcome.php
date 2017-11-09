@@ -49,4 +49,9 @@ class Welcome extends CI_Controller
     {
         echo json_encode($this->user_lib->all());
     }
+
+    public function all_session()
+    {
+        echo json_encode($this->session->all_userdata());
+    }
 }

@@ -24,10 +24,6 @@ class Facebook extends CI_Controller
         $response = $fb->get('/me?fields=name,email');
         $userNode = $response->getGraphUser();
 
-        echo $userNode;
-        echo '<hr>';
-        print_r($userNode);
-
         // 使用 email 和 fb_id 搜尋是否有該使用者 , 如果有 email 責自動更新 fb_id
         $return = $this->user_lib->get_fb_member($userNode['email'], $userNode['id']);
 
@@ -36,20 +32,15 @@ class Facebook extends CI_Controller
             $this->user_lib->create($userNode['email'], $userNode['id']);
         }
 
-        // 進行登入動作
-        // $users = array(
-        //     'id' => $return['data']['id'],
-        //     'groupid' => $return['data']['groupid'],
-        //     'username' => $return['data']['username'],
-        //     'email' => $return['data']['email'],
-        //     'logged_in' => true
-        // );
-        // $this->session->set_userdata('users', $users);
-
-        // 登入後進行購物車同步(之前+現在) by Ivan Wang @ 2017/02/03
-        // $this->cart->sync($users['id']);
+        // 從 facebook 取得到的 email & id 進行登入使用
+        $users = array(
+            'id' => $userNode['id'],
+            'email' => $userNode['email'],
+            'logged_in' => true
+        );
+        $this->session->set_userdata('users', $users);
 
         // 登入註冊後進行導向至首頁
-        redirect(base_url());
+        // redirect(base_url());
     }
 }
