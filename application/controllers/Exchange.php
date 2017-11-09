@@ -8,4 +8,9 @@ class Exchange extends CI_Controller
         $this->load->library('Exchange_lib');
         $this->exchange_lib->get_rate();
     }
+
+    public function crontab()
+    {
+        $this->exchange_lib->crontab();
+    }
 }
