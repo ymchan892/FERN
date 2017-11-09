@@ -24,9 +24,11 @@ class Facebook extends CI_Controller
         $response = $fb->get('/me?fields=name,email');
         $userNode = $response->getGraphUser();
 
-        echo json_encode($userNode);
+        echo $userNode;
+        echo '<hr>';
+        print_r($userNode);
         exit;
-        
+
         // 使用 email 和 fb_id 搜尋是否有該使用者 , 如果有 email 責自動更新 fb_id
         $return = json_decode($this->common_lib->curl('GET', '/v1/users/facebook?email=' . $userNode['email'] . '&fb_id=' . $userNode['id'], null), true);
 
