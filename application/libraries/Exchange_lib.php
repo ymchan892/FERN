@@ -141,4 +141,21 @@ class Exchange_lib
         $this->CI->db->where('id', $id);
         $this->CI->db->delete('exchange');
     }
+
+    public function crontab()
+    {
+        $query = $this->CI->db->get('exchange');
+        $rows = $query->result_array();
+
+
+        foreach ($rows as $key => $value) {
+            //http://35.194.235.183/v1/exchange/data/808/spot/JPY/0.2650
+
+            echo $this->get_rate($value['code'], $value['type'], $value['currency'], $value['exchange']);
+
+            echo '<br>';
+        }
+
+        // echo json_encode($rows);
+    }
 }
