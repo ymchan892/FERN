@@ -10,4 +10,4 @@ $config['smtp_pass'] = SMTP_PASS;
 $config['charset'] = 'utf-8';
 $config['newline'] = "\r\n";
 $config['mailtype'] = 'html';
-$config['validate'] = TRUE;
+$config['validate'] = true;
