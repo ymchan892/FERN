@@ -1,2 +1,5 @@
+index.html
+/nbproject/*
 /nbproject/private/
+/application/logs/*
 /environment-production.php

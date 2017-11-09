@@ -9,7 +9,7 @@ define('IS_PRODUCTION_SITE', false);
 define('DB_HOSTNAME', substr($_SERVER['HTTP_HOST'], 0));
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '123456');
-define('DB_DATABASE', 'dev-rwd-db');
+define('DB_DATABASE', 'fern');
 
 // RESTful API Setting
 define('API_KEY', 'xxxx');
