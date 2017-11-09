@@ -42,7 +42,7 @@ class Exchange extends REST_Controller
      */
     public function data_get()
     {
-        $this->load->library('Exchange_lib');
+        // $this->load->library('Exchange_lib');
         // http://192.168.99.100/v1/exchange/data/808/Spot/USD/0.27
         // 銀行代碼
         $code = $this->uri->segment(4); // 銀行編號

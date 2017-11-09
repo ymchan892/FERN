@@ -23,4 +23,25 @@ class Welcome extends CI_Controller
     {
         // $this->load->view('welcome_message');
     }
+
+    public function create_user()
+    {
+        $this->user_lib->create('shengeih@gmail.com', '1234567890');
+    }
+
+    public function exchange_create()
+    {
+        $user_id = '1';
+        $bank = '808';
+        $type = 'spot';
+        $currency = 'USD';
+        $exchange = '30.1';
+        $this->exchange_lib->create($user_id, $bank, $type, $currency, $exchange);
+    }
+
+    public function exchange_delete()
+    {
+        $id = '2';
+        $this->exchange_lib->delete($id);
+    }
 }

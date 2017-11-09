@@ -111,4 +111,34 @@ class Exchange_lib
             }
         }
     }
+
+    public function create($user_id, $bank, $type, $currency, $exchange)
+    {
+        $this->CI->db->trans_begin();
+
+        $insert = array(
+        'user_id' => $user_id,
+        'bank' => $bank,
+        'type' => $type,
+        'currency'=>$currency,
+        'exchange' => $exchange,
+        'createtime' => date('Y-m-d H:i:s')
+      );
+        $this->CI->db->insert('exchange', $insert);
+
+        if ($this->CI->db->trans_status() === false) {
+            log_message('info', ' ERROR : ' . $this->CI->db->last_query());
+            $this->CI->db->trans_rollback();
+            return false;
+        } else {
+            $this->CI->db->trans_commit();
+            return true;
+        }
+    }
+
+    public function delete($id)
+    {
+        $this->CI->db->where('id', $id);
+        $this->CI->db->delete('exchange');
+    }
 }
