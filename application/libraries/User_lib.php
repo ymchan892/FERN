@@ -11,18 +11,18 @@ class User_lib
         $this->CI = & get_instance();
     }
 
-    public function check_login($account, $password, $ip)
-    {
-        // 進行加料編碼
-        $password = $this->_user_password_md5($password);
-
-        $this->CI->db->select('id,groupid,username,email');
-        $this->CI->db->where('username', $account);
-        $this->CI->db->where('password', $password);
-        $this->CI->db->where('is_visible', '0'); // 0 : 帳號未停用 by Shengeih Wang @ 2017/02/06
-        $query = $this->CI->db->get('onephp_user');
-        $row = $query->row_array();
-    }
+    // public function check_login($account, $password, $ip)
+    // {
+    //     // 進行加料編碼
+    //     $password = $this->_user_password_md5($password);
+    //
+    //     $this->CI->db->select('id,groupid,username,email');
+    //     $this->CI->db->where('username', $account);
+    //     $this->CI->db->where('password', $password);
+    //     $this->CI->db->where('is_visible', '0'); // 0 : 帳號未停用 by Shengeih Wang @ 2017/02/06
+    //     $query = $this->CI->db->get('onephp_user');
+    //     $row = $query->row_array();
+    // }
 
     public function create($email, $fb)
     {
@@ -59,6 +59,7 @@ class User_lib
 
     public function all()
     {
-        return $this->CI->db->get('users');
+        $query = $this->CI->db->get('users');
+        return $rows = $query->result_array();
     }
 }
