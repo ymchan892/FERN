@@ -56,4 +56,9 @@ class User_lib
         $query = $this->CI->db->get('users');
         return $query->row_array();
     }
+
+    public function all()
+    {
+        return $this->CI->db->get('users');
+    }
 }

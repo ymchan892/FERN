@@ -44,4 +44,9 @@ class Welcome extends CI_Controller
         $id = '2';
         $this->exchange_lib->delete($id);
     }
+
+    public function user_all()
+    {
+        echo json_encode($this->user_lib->all());
+    }
 }
