@@ -27,29 +27,24 @@ class Facebook extends CI_Controller
         echo $userNode;
         echo '<hr>';
         print_r($userNode);
-        exit;
 
         // 使用 email 和 fb_id 搜尋是否有該使用者 , 如果有 email 責自動更新 fb_id
-        $return = json_decode($this->common_lib->curl('GET', '/v1/users/facebook?email=' . $userNode['email'] . '&fb_id=' . $userNode['id'], null), true);
+        $return = $this->user_lib->get_fb_member($userNode['email'], $userNode['id']);
 
-        if (empty($return['data'])) {
-            $data = array(
-                'email' => $userNode['email'],
-                'name' => $userNode['name'],
-                'fb_id' => $userNode['id'],
-                'ip' => $_SERVER['REMOTE_ADDR']
-            );
-            $return = json_decode($this->common_lib->curl('POST', '/v1/users/facebook', $data), true);
+        // 如果回傳資料是空的 , 則要建立帳號
+        if (empty($return)) {
+            $this->user_lib->create($userNode['email'], $userNode['id']);
         }
 
-        $users = array(
-            'id' => $return['data']['id'],
-            'groupid' => $return['data']['groupid'],
-            'username' => $return['data']['username'],
-            'email' => $return['data']['email'],
-            'logged_in' => true
-        );
-        $this->session->set_userdata('users', $users);
+        // 進行登入動作
+        // $users = array(
+        //     'id' => $return['data']['id'],
+        //     'groupid' => $return['data']['groupid'],
+        //     'username' => $return['data']['username'],
+        //     'email' => $return['data']['email'],
+        //     'logged_in' => true
+        // );
+        // $this->session->set_userdata('users', $users);
 
         // 登入後進行購物車同步(之前+現在) by Ivan Wang @ 2017/02/03
         // $this->cart->sync($users['id']);

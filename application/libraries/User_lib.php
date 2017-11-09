@@ -44,4 +44,16 @@ class User_lib
             return true;
         }
     }
+
+    /**
+     * 搜尋是否有 fb member
+     */
+    public function get_fb_member($email, $fb)
+    {
+        // $this->CI->db->select('id,groupid,username,email');
+        $this->CI->db->where('email', $email);
+        $this->CI->db->where('fb', $fb);
+        $query = $this->CI->db->get('users');
+        return $query->row_array();
+    }
 }
