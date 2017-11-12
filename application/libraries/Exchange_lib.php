@@ -101,10 +101,6 @@ class Exchange_lib
     */
     public function get_bank($code)
     {
-        if ($code == '' || $code == null) {
-            exit;
-        }
-
         foreach ($this->CI->config->item('banks') as $key => $value) {
             if ($value['code'] == $code) {
                 return $value;
@@ -112,19 +108,35 @@ class Exchange_lib
         }
     }
 
-    public function create($user_id, $bank, $type, $currency, $exchange)
+    public function get_type($type)
+    {
+        foreach ($this->CI->config->item('type') as $key => $value) {
+            if ($value['value'] == $type) {
+                return $value;
+            }
+        }
+    }
+
+    public function create($email, $code, $type, $currency, $exchange)
     {
         $this->CI->db->trans_begin();
 
+        $bank = $this->get_bank($code);
+        $type_s = $this->get_type($type);
+
         $insert = array(
-        'user_id' => $user_id,
-        'bank' => $bank,
+        'guid' => $this->CI->common_lib->guid(),
+        'email' => $email,
+        'code' => $code,
+        'code_name' => $bank['name'],
         'type' => $type,
+        'type_name' => $type_s['name'],
         'currency'=>$currency,
         'exchange' => $exchange,
         'createtime' => date('Y-m-d H:i:s')
-      );
+        );
         $this->CI->db->insert('exchange', $insert);
+        log_message('info', $this->CI->db->last_query());
 
         if ($this->CI->db->trans_status() === false) {
             log_message('info', ' ERROR : ' . $this->CI->db->last_query());
@@ -136,10 +148,11 @@ class Exchange_lib
         }
     }
 
-    public function delete($id)
+    public function delete($guid)
     {
-        $this->CI->db->where('id', $id);
+        $this->CI->db->where('guid', $guid);
         $this->CI->db->delete('exchange');
+        log_message('info', $this->CI->db->last_query());
     }
 
     public function crontab()
@@ -147,15 +160,22 @@ class Exchange_lib
         $query = $this->CI->db->get('exchange');
         $rows = $query->result_array();
 
-
         foreach ($rows as $key => $value) {
             //http://35.194.235.183/v1/exchange/data/808/spot/JPY/0.2650
-
-            echo $this->get_rate($value['code'], $value['type'], $value['currency'], $value['exchange']);
-
-            echo '<br>';
+            $message .= $this->get_rate($value['code'], $value['type'], $value['currency'], $value['exchange']);
+            $message .= '<br>';
         }
-
+        echo $message;
         // echo json_encode($rows);
+    }
+
+    public function get_exchange_data()
+    {
+        $user = $this->CI->session->userdata('user');
+
+        $this->CI->db->where('email', $user['email']);
+        $this->CI->db->order_by('createtime', 'DESC');
+        $query = $this->CI->db->get('exchange');
+        return $query->result_array();
     }
 }

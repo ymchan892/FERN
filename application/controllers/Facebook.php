@@ -33,12 +33,7 @@ class Facebook extends CI_Controller
         }
 
         // 從 facebook 取得到的 email & id 進行登入使用
-        $user = array(
-            'id' => $userNode['id'],
-            'email' => $userNode['email'],
-            'logged_in' => true
-        );
-        $this->session->set_userdata('user', $user);
+        $this->user_lib->set_session($userNode['id'], $userNode['email']);
 
         // 登入註冊後進行導向至首頁
         redirect("/login");
