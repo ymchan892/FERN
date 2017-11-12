@@ -157,6 +157,7 @@ class Exchange_lib
 
     public function crontab()
     {
+        $message = '';
         $query = $this->CI->db->get('exchange');
         $rows = $query->result_array();
 
