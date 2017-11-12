@@ -36,6 +36,6 @@ class Facebook extends CI_Controller
         $this->user_lib->set_session($userNode['id'], $userNode['email']);
 
         // 登入註冊後進行導向至首頁
-        redirect("/login");
+        redirect("/home");
     }
 }
