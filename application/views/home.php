@@ -11,8 +11,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <a href="/fb_login.php?r=<?= LOGIN_RETURN_URL ?>">Facebook 登入</a>
-
+        {login}
+        <br><br>
         {form}
         銀行 :
         <select name="code">{code}</select>
@@ -21,7 +21,7 @@ and open the template in the editor.
         <input type="numeric" name="exchange" size="7" placeholder="0.276">
         <input type="submit" value="新增">
         {form_end}
-
+        <br>
         <table border="1" width="50%">
           <tr>
             <td align="right">銀行</td>
