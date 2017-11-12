@@ -29,6 +29,7 @@ class User_lib
         $this->CI->db->trans_begin();
 
         $insert = array(
+          'guid' => $this->CI->common_lib->guid(),
           'email' => $email,
           'fb' => $fb,
           'createtime' => date('Y-m-d H:i:s')
@@ -61,5 +62,15 @@ class User_lib
     {
         $query = $this->CI->db->get('users');
         return $rows = $query->result_array();
+    }
+
+    public function set_session($id, $email)
+    {
+        $user = array(
+          'id' => $id,
+          'email' => $email,
+          'logged_in' => true
+      );
+        $this->CI->session->set_userdata('user', $user);
     }
 }
