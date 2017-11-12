@@ -7,9 +7,9 @@ class Home extends CI_Controller
     {
         // 判斷是否已經登入
         if (empty($this->session->userdata('user'))) {
-            echo '尚未登入';
+            $login = '<a href="/fb_login.php?r='.LOGIN_RETURN_URL.'">Facebook 登入</a>';
         } else {
-            echo '已經登入';
+            $login = '<a href="/home/logout">登出</a>';
         }
 
         $data = array(
@@ -18,12 +18,16 @@ class Home extends CI_Controller
             'type' => $this->_set_type_option(),
             'currency' => $this->_set_currency_option(),
             'form_end' => '</form>',
-            'exchange_data' => $this->exchange_lib->get_exchange_data()
+            'exchange_data' => $this->exchange_lib->get_exchange_data(),
+            'login' => $login
         );
-        // $d = $this->exchange_lib->get_exchange_data();
-        // echo json_encode($d);
-        // exit;
         $this->parser->parse('home', $data);
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('/home');
     }
 
     public function create_user()
@@ -31,6 +35,9 @@ class Home extends CI_Controller
         $this->user_lib->create('shengeih@gmail.com', '1234567890');
     }
 
+    /**
+    * DELETE FUNCTION
+    */
     public function exchange_create()
     {
         $user_id = '1';
@@ -41,6 +48,9 @@ class Home extends CI_Controller
         $this->exchange_lib->create($user_id, $bank, $type, $currency, $exchange);
     }
 
+    /**
+    * DELETE FUNCTION
+    */
     public function exchange_delete()
     {
         $id = '2';

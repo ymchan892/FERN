@@ -16,6 +16,11 @@ class Exchange extends CI_Controller
 
     public function create()
     {
+        $user = $this->session->userdata('user');
+        if (!$user['logged_in']) {
+            redirect('/home');
+        }
+
         $status = true;
         $code = $this->input->post('code');
         $bank = $this->exchange_lib->get_bank($code);
@@ -44,16 +49,19 @@ class Exchange extends CI_Controller
         }
 
         if ($status) {
-            $user = $this->session->userdata('user');
             $this->exchange_lib->create($user['email'], $code, $type, $currency, $exchange);
-            redirect('/home/index');
+            redirect('/home');
         }
     }
 
     public function delete()
     {
-        $guid = $this->input->get('guid');
+        $user = $this->session->userdata('user');
+        if (!$user['logged_in']) {
+            redirect('/home');
+        }
 
+        $guid = $this->input->get('guid');
         if ($this->common_lib->check_guid($guid)) {
             $this->exchange_lib->delete($guid);
         } else {
