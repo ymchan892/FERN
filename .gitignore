@@ -1,4 +1,5 @@
 index.html
+/*.sh
 /nbproject/*
 /nbproject/private/
 /application/logs/*
